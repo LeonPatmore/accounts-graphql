@@ -20,7 +20,7 @@ curl --location 'http://localhost:4000/graphql' \
 --header 'Content-Type: application/json' \
 --data-raw '{
   "query": "mutation CreateUser($username: String!, $email: String!) { createUser(username: $username, email: $email) { id username email } }",
-  "variables": { 
+  "variables": {
     "username": "Leon",
     "email": "a@b.com"
     }
