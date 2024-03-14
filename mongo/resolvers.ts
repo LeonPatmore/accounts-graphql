@@ -2,8 +2,8 @@ import User from "./user";
 
 const resolvers = {
   Query: {
-    users: () => User.find(),
-    user: (_: any, { id }: any) => User.findById(id),
+    users: async () => User.find(),
+    user: async (_: any, { id }: any) => User.findById(id),
   },
   Mutation: {
     createUser: (_: any, { username, email }: any) => {
