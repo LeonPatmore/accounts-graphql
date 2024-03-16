@@ -110,7 +110,7 @@ union Media = Book | Movie
 
 ## Resolvers
 
-A resolver is a function that's responsible for populating the 
+A resolver is a function that's responsible for populating the
 data for a single field in your schema.
 
 Resolvers generally accept 4 positional arguments:
