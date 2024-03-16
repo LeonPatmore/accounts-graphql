@@ -1,5 +1,89 @@
 # Accounts GraphQL
 
+## GraphQL Basics
+
+### Object Types and Fields
+
+An object type is:
+
+```
+type Character {
+  name: String!
+  appearsIn: [Episode!]!
+}
+```
+
+- This object has fields `name` and `appearsIn`.
+- `String` is a built-in type.
+- `String!` means the field is non-nullable.
+- `[Episode!]!` is an array of `Episode` objects.
+
+### Arguments
+
+Every field on an object can have zero or more arguments.
+
+```
+type Starship {
+  id: ID!
+  name: String!
+  length(unit: LengthUnit = METER): Float
+}
+```
+
+In this case, `length` has one argument called `unit`.
+
+Arguments support the following:
+- Types.
+- Default values.
+- Required/optional.
+
+### Supported Types
+
+- Scalar types
+- Object type
+- Special types
+- Enum
+- Input
+- Union
+- Interface
+
+### Scalar Types
+
+Scalar types don't have any subfields, they are representing concrete data.
+
+- Int
+- Float
+- String
+- Boolean
+- ID
+
+#### Custom Scalar Types
+
+You can define custom scalar types:
+
+```
+scalar Date
+```
+
+### Special Types
+
+There are three special types within a schema:
+- `query`
+- `mutation`
+- `subscription`
+
+### Enums
+
+A scalar that represents a finite amount of values.
+
+```
+enum Episode {
+  NEWHOPE
+  EMPIRE
+  JEDI
+}
+```
+
 ## Local Running
 
 ### Commands
