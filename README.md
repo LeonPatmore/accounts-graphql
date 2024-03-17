@@ -46,3 +46,5 @@ curl --location 'http://localhost:4000/graphql' \
 - GraphQL basics: https://graphql.org/learn/schema/#scalar-types
 - Apollo graph basics: https://www.apollographql.com/docs/
 - https://graphql.org/graphql-js/running-an-express-graphql-server/
+- https://dgraph.io/
+- https://github.com/strawberry-graphql/strawberry
