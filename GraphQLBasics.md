@@ -108,6 +108,50 @@ A union type means the field type is one of the list:
 union Media = Book | Movie
 ```
 
+## Queries and Mutations
+
+### Aliases
+
+Aliases provide a way to set the returned field name. This allows you to request two
+objects in the same request, for example:
+
+```
+query {
+    first: user(id: \"65f249307d6e9c957848867a\") {
+        id username email
+    }
+    second: user(id: \"65f633041c7e65895bfaaa03\") {
+        id username email
+    }
+}
+```
+
+In this case, instead of the returned data having field name `user`, it will have field names
+`first` and `second`.
+
+### Fragments
+
+Fragments allow you to define a set of fields. For example:
+
+```
+fragment userFields on User {
+    id username email
+}
+```
+
+Then you can use this fragment when querying:
+
+```
+query {
+    first: user(id: \"65f249307d6e9c957848867a\") {
+        ...userFields
+    }
+    second: user(id: \"65f633041c7e65895bfaaa03\") {
+        ...userFields
+    }
+}
+```
+
 ## Resolvers
 
 A resolver is a function that's responsible for populating the

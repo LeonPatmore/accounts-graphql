@@ -1,0 +1,11 @@
+type Account {
+    id: ID!
+#    owner: User,
+    externalId: String!
+    name: String!
+}
+
+type Query {
+    accounts: [Account!]!
+    account(id: ID!): Account
+}
