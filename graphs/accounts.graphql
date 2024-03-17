@@ -1,6 +1,11 @@
-type Account {
+interface Account {
     id: ID!
-#    owner: User,
+    externalId: String!
+    name: String!
+}
+
+type TokensAccount implements Account {
+    id: ID!
     externalId: String!
     name: String!
 }
@@ -8,4 +13,8 @@ type Account {
 type Query {
     accounts: [Account!]!
     account(id: ID!): Account
+}
+
+type Mutation {
+    createTokensAccount(externalId: String!, name: String!, token: String!) : TokensAccount
 }
