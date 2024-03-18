@@ -13,7 +13,7 @@
 
 ### Links
 
-- MongoDB UI: http://localhost:8081/
+- MongoDB UI: http://localhost:8081/ (default credentials are `admin:pass`).
 
 ## HTTP Requests
 

@@ -6,7 +6,7 @@ const accountSchema = new mongoose.Schema(
     name: String,
   },
   {
-    collection: "accounts",
+    collection: "static-accounts",
   },
 );
 

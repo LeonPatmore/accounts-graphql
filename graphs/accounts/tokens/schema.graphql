@@ -1,0 +1,34 @@
+extend schema
+  @link(url: "https://specs.apollo.dev/federation/v2.3", import: ["@key", "@shareable"])
+
+#interface Account {
+#  id: ID!
+#}
+#
+#type TokensAccount implements Account @key(fields: "id") {
+#  id: ID!
+#  externalId: String!
+#  name: String!
+#  token: String!
+#}
+#
+#extend type Query {
+#  accounts: [Account!]! @shareable
+#}
+#
+#type Mutation {
+#  createTokensAccount(
+#    externalId: String!
+#    name: String!
+#    token: String!
+#  ): TokensAccount
+#}
+
+type Account @shareable {
+  id: ID!
+  name: String
+}
+
+extend type Query {
+  accounts: [Account!]! @shareable
+}

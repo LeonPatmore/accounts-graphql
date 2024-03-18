@@ -3,7 +3,6 @@ schema
   @link(url: "https://specs.apollo.dev/join/v0.3", for: EXECUTION)
 {
   query: Query
-  mutation: Mutation
 }
 
 directive @join__enumValue(graph: join__Graph!) repeatable on ENUM_VALUE
@@ -21,18 +20,18 @@ directive @join__unionMember(graph: join__Graph!, member: String!) repeatable on
 directive @link(url: String, as: String, for: link__Purpose, import: [link__Import]) repeatable on SCHEMA
 
 type Account
-  @join__type(graph: REVIEWS)
+  @join__type(graph: STATIC)
+  @join__type(graph: TOKENS)
 {
   id: ID!
-  externalId: String!
-  name: String!
+  name: String
 }
 
 scalar join__FieldSet
 
 enum join__Graph {
-  REVIEWS @join__graph(name: "reviews", url: "http://localhost:4002/")
-  USERS @join__graph(name: "users", url: "http://localhost:4000/")
+  STATIC @join__graph(name: "static", url: "http://localhost:4000/")
+  TOKENS @join__graph(name: "tokens", url: "http://localhost:4002/")
 }
 
 scalar link__Import
@@ -49,26 +48,9 @@ enum link__Purpose {
   EXECUTION
 }
 
-type Mutation
-  @join__type(graph: USERS)
-{
-  createUser(username: String!, email: String!): User
-}
-
 type Query
-  @join__type(graph: REVIEWS)
-  @join__type(graph: USERS)
+  @join__type(graph: STATIC)
+  @join__type(graph: TOKENS)
 {
-  accounts: [Account!]! @join__field(graph: REVIEWS)
-  account(id: ID!): Account @join__field(graph: REVIEWS)
-  users: [User!]! @join__field(graph: USERS)
-  user(id: ID!): User @join__field(graph: USERS)
-}
-
-type User
-  @join__type(graph: USERS)
-{
-  id: ID!
-  username: String!
-  email: String!
+  accounts: [Account!]!
 }
