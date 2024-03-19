@@ -6,6 +6,7 @@
   },
   "dependencies": {
     "@apollo/gateway": "^2.7.1",
+    "@apollo/subgraph": "^2.7.1",
     "@graphql-tools/schema": "^10.0.3",
     "@types/node": "^20.11.28",
     "apollo-server": "^3.13.0",

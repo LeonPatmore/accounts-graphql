@@ -1,0 +1,18 @@
+extend schema
+  @link(
+    url: "https://specs.apollo.dev/federation/v2.3"
+    import: ["@key", "@interfaceObject"]
+  )
+
+interface Account @key(fields: "id") {
+  id: ID!
+}
+
+type TokensAccount implements Account @key(fields: "id") {
+  id: ID!
+  token: String
+}
+
+type Query {
+  tokensAccounts: [TokensAccount]
+}

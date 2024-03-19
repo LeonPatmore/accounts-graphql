@@ -1,38 +1,65 @@
 schema
   @link(url: "https://specs.apollo.dev/link/v1.0")
-  @link(url: "https://specs.apollo.dev/join/v0.3", for: EXECUTION)
-{
+  @link(url: "https://specs.apollo.dev/join/v0.3", for: EXECUTION) {
   query: Query
-  mutation: Mutation
 }
 
 directive @join__enumValue(graph: join__Graph!) repeatable on ENUM_VALUE
 
-directive @join__field(graph: join__Graph, requires: join__FieldSet, provides: join__FieldSet, type: String, external: Boolean, override: String, usedOverridden: Boolean) repeatable on FIELD_DEFINITION | INPUT_FIELD_DEFINITION
+directive @join__field(
+  graph: join__Graph
+  requires: join__FieldSet
+  provides: join__FieldSet
+  type: String
+  external: Boolean
+  override: String
+  usedOverridden: Boolean
+) repeatable on FIELD_DEFINITION | INPUT_FIELD_DEFINITION
 
 directive @join__graph(name: String!, url: String!) on ENUM_VALUE
 
-directive @join__implements(graph: join__Graph!, interface: String!) repeatable on OBJECT | INTERFACE
+directive @join__implements(
+  graph: join__Graph!
+  interface: String!
+) repeatable on OBJECT | INTERFACE
 
-directive @join__type(graph: join__Graph!, key: join__FieldSet, extension: Boolean! = false, resolvable: Boolean! = true, isInterfaceObject: Boolean! = false) repeatable on OBJECT | INTERFACE | UNION | ENUM | INPUT_OBJECT | SCALAR
+directive @join__type(
+  graph: join__Graph!
+  key: join__FieldSet
+  extension: Boolean! = false
+  resolvable: Boolean! = true
+  isInterfaceObject: Boolean! = false
+) repeatable on OBJECT | INTERFACE | UNION | ENUM | INPUT_OBJECT | SCALAR
 
-directive @join__unionMember(graph: join__Graph!, member: String!) repeatable on UNION
+directive @join__unionMember(
+  graph: join__Graph!
+  member: String!
+) repeatable on UNION
 
-directive @link(url: String, as: String, for: link__Purpose, import: [link__Import]) repeatable on SCHEMA
+directive @link(
+  url: String
+  as: String
+  for: link__Purpose
+  import: [link__Import]
+) repeatable on SCHEMA
 
-type Account
-  @join__type(graph: REVIEWS)
-{
+interface Account
+  @join__type(graph: STATIC, key: "id", isInterfaceObject: true)
+  @join__type(graph: TOKENS, key: "id") {
   id: ID!
-  externalId: String!
-  name: String!
+  name: String! @join__field(graph: STATIC)
+  accountType: AccountType! @join__field(graph: STATIC)
+}
+
+enum AccountType @join__type(graph: STATIC) {
+  TOKENS_ACCOUNT @join__enumValue(graph: STATIC)
 }
 
 scalar join__FieldSet
 
 enum join__Graph {
-  REVIEWS @join__graph(name: "reviews", url: "http://localhost:4002/")
-  USERS @join__graph(name: "users", url: "http://localhost:4000/")
+  STATIC @join__graph(name: "static", url: "http://localhost:4000/")
+  TOKENS @join__graph(name: "tokens", url: "http://localhost:4002/")
 }
 
 scalar link__Import
@@ -49,26 +76,15 @@ enum link__Purpose {
   EXECUTION
 }
 
-type Mutation
-  @join__type(graph: USERS)
-{
-  createUser(username: String!, email: String!): User
+type Query @join__type(graph: STATIC) @join__type(graph: TOKENS) {
+  tokensAccounts: [TokensAccount] @join__field(graph: TOKENS)
 }
 
-type Query
-  @join__type(graph: REVIEWS)
-  @join__type(graph: USERS)
-{
-  accounts: [Account!]! @join__field(graph: REVIEWS)
-  account(id: ID!): Account @join__field(graph: REVIEWS)
-  users: [User!]! @join__field(graph: USERS)
-  user(id: ID!): User @join__field(graph: USERS)
-}
-
-type User
-  @join__type(graph: USERS)
-{
+type TokensAccount implements Account
+  @join__implements(graph: TOKENS, interface: "Account")
+  @join__type(graph: TOKENS, key: "id") {
   id: ID!
-  username: String!
-  email: String!
+  token: String
+  name: String! @join__field
+  accountType: AccountType! @join__field
 }

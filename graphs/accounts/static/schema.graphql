@@ -1,0 +1,15 @@
+extend schema
+  @link(
+    url: "https://specs.apollo.dev/federation/v2.3"
+    import: ["@key", "@interfaceObject"]
+  )
+
+enum AccountType {
+  TOKENS_ACCOUNT
+}
+
+type Account @key(fields: "id") @interfaceObject {
+  id: ID!
+  name: String!
+  accountType: AccountType!
+}

@@ -3,11 +3,11 @@ import mongoose from "mongoose";
 const accountSchema = new mongoose.Schema(
   {
     externalId: String,
-    name: String,
+    token: String,
   },
   {
-    collection: "accounts",
+    collection: "tokens-accounts",
   },
 );
 
-export default mongoose.model("Account", accountSchema);
+export default mongoose.model("TokenAccount", accountSchema);
