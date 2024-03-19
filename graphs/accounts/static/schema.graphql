@@ -1,29 +1,15 @@
 extend schema
-@link(url: "https://specs.apollo.dev/federation/v2.3", import: ["@key", "@shareable"])
+  @link(
+    url: "https://specs.apollo.dev/federation/v2.3"
+    import: ["@key", "@interfaceObject"]
+  )
 
-#interface Account {
-#  id: ID!
-#}
-#
-#type StaticAccount implements Account @key(fields: "id") {
-#  id: ID!
-#  externalId: String!
-#  name: String!
-#}
-#
-#extend type Query {
-#  accounts: [Account!]! @shareable
-#}
-#
-#type Mutation {
-#  createStaticAccount(externalId: String!, name: String!): StaticAccount
-#}
-
-type Account @shareable {
-  id: ID!
-  name: String
+enum AccountType {
+  TOKENS_ACCOUNT
 }
 
-extend type Query {
-  accounts: [Account!]! @shareable
+type Account @key(fields: "id") @interfaceObject {
+  id: ID!
+  name: String!
+  accountType: AccountType!
 }

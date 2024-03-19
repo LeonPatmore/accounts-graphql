@@ -3,7 +3,6 @@ import mongoose from "mongoose";
 const accountSchema = new mongoose.Schema(
   {
     externalId: String,
-    name: String,
     token: String,
   },
   {
@@ -11,4 +10,4 @@ const accountSchema = new mongoose.Schema(
   },
 );
 
-export default mongoose.model("Account", accountSchema);
+export default mongoose.model("TokenAccount", accountSchema);
