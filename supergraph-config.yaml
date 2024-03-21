@@ -1,9 +1,9 @@
 federation_version: 2
 subgraphs:
-  static:
+  common:
     routing_url: http://localhost:4000/
     schema:
-      file: graphs/accounts/static/schema.graphql
+      file: graphs/accounts/common/schema.graphql
   tokens:
     routing_url: http://localhost:4002/
     schema:
@@ -12,3 +12,7 @@ subgraphs:
     routing_url: http://localhost:4004/
     schema:
       file: graphs/accounts/business/schema.graphql
+  main:
+    routing_url: http://localhost:4006/
+    schema:
+      file: graphs/accounts/main/schema.graphql

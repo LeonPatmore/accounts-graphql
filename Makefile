@@ -1,10 +1,10 @@
 start-mongo:
 	docker-compose -f mongo-compose.yaml up -d
 
-run-static-account:
-	export NODE_DEBUG=http && npx ts-node graphs/accounts/static/index.ts
+run-common-account:
+	export NODE_DEBUG=http && npx ts-node graphs/accounts/common/index.ts
 
-rsa: run-static-account
+rca: run-common-account
 
 run-tokens-account:
 	export NODE_DEBUG=http && npx ts-node graphs/accounts/tokens/index.ts
@@ -15,6 +15,11 @@ run-business-account:
 	export NODE_DEBUG=http && npx ts-node graphs/accounts/business/index.ts
 
 rba: run-business-account
+
+run-main:
+	export NODE_DEBUG=http && npx ts-node graphs/accounts/main/index.ts
+
+rm: run-main
 
 fmt:
 	npx prettier . --write

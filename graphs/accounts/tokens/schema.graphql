@@ -1,24 +1,14 @@
 extend schema
   @link(
     url: "https://specs.apollo.dev/federation/v2.3"
-    import: ["@key", "@interfaceObject", "@external", "@shareable"]
+    import: ["@key", "@shareable"]
   )
 
-interface Account @key(fields: "id") {
+type TokensAccount @key(fields: "id") {
   id: ID!
-}
-
-type TokensAccount implements Account @key(fields: "id") {
-  id: ID!
-  token: String
-}
-
-type BusinessAccount implements Account @key(fields: "id") {
-  id: ID!
-  businessId: String @shareable
+  token: String @shareable
 }
 
 type Query {
   tokensAccounts: [TokensAccount]
-  accounts: [Account]
 }

@@ -7,7 +7,7 @@ const accountSchema = new mongoose.Schema(
     accountType: String,
   },
   {
-    collection: "static-accounts",
+    collection: "common-accounts",
   },
 );
 
