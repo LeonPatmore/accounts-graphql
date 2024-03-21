@@ -1,0 +1,14 @@
+extend schema
+  @link(
+    url: "https://specs.apollo.dev/federation/v2.3"
+    import: ["@key", "@interfaceObject", "@shareable"]
+  )
+
+type BusinessAccount @key(fields: "id") {
+  id: ID!
+  businessId: String @shareable
+}
+
+type Query {
+  businessAccounts: [BusinessAccount]
+}

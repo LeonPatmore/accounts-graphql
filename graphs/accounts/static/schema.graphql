@@ -6,6 +6,7 @@ extend schema
 
 enum AccountType {
   TOKENS_ACCOUNT
+  BUSINESS_ACCOUNT
 }
 
 type Account @key(fields: "id") @interfaceObject {

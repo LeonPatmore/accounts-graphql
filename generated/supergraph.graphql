@@ -53,11 +53,23 @@ interface Account
 
 enum AccountType @join__type(graph: STATIC) {
   TOKENS_ACCOUNT @join__enumValue(graph: STATIC)
+  BUSINESS_ACCOUNT @join__enumValue(graph: STATIC)
+}
+
+type BusinessAccount implements Account
+  @join__implements(graph: TOKENS, interface: "Account")
+  @join__type(graph: BUSINESS, key: "id")
+  @join__type(graph: TOKENS, key: "id") {
+  id: ID!
+  businessId: String
+  name: String! @join__field
+  accountType: AccountType! @join__field
 }
 
 scalar join__FieldSet
 
 enum join__Graph {
+  BUSINESS @join__graph(name: "business", url: "http://localhost:4004/")
   STATIC @join__graph(name: "static", url: "http://localhost:4000/")
   TOKENS @join__graph(name: "tokens", url: "http://localhost:4002/")
 }
@@ -76,8 +88,13 @@ enum link__Purpose {
   EXECUTION
 }
 
-type Query @join__type(graph: STATIC) @join__type(graph: TOKENS) {
+type Query
+  @join__type(graph: BUSINESS)
+  @join__type(graph: STATIC)
+  @join__type(graph: TOKENS) {
+  businessAccounts: [BusinessAccount] @join__field(graph: BUSINESS)
   tokensAccounts: [TokensAccount] @join__field(graph: TOKENS)
+  accounts: [Account] @join__field(graph: TOKENS)
 }
 
 type TokensAccount implements Account

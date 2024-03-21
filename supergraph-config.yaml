@@ -8,3 +8,7 @@ subgraphs:
     routing_url: http://localhost:4002/
     schema:
       file: graphs/accounts/tokens/schema.graphql
+  business:
+    routing_url: http://localhost:4004/
+    schema:
+      file: graphs/accounts/business/schema.graphql

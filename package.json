@@ -10,7 +10,9 @@
     "@graphql-tools/schema": "^10.0.3",
     "@types/node": "^20.11.28",
     "apollo-server": "^3.13.0",
+    "axios": "^1.6.8",
     "express": "^4.18.3",
-    "mongoose": "^8.2.1"
+    "mongoose": "^8.2.1",
+    "node-fetch": "^3.3.2"
   }
 }
