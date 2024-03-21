@@ -11,7 +11,7 @@ const resolvers = {
             token: account["token"],
           };
         });
-      })
+      }),
   },
 };
 

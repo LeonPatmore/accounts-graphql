@@ -1,0 +1,94 @@
+{
+  "info": {
+    "_postman_id": "bd956664-176e-40b6-9afe-581f0c5b2558",
+    "name": "GraphQL",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "24891868"
+  },
+  "item": [
+    {
+      "name": "SuperGetTokensAccounts",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:4008/graphql?query={ tokensAccounts { id name token accountType } }",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "4008",
+          "path": ["graphql"],
+          "query": [
+            {
+              "key": "query",
+              "value": "{ tokensAccounts { id name token accountType } }"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "SuperGetBusinessAccounts",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:4008/graphql?query={ businessAccounts { id name businessId accountType } }",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "4008",
+          "path": ["graphql"],
+          "query": [
+            {
+              "key": "query",
+              "value": "{ businessAccounts { id name businessId accountType } }"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "SuperGetBoth",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:4008/graphql?query={ tokensAccounts { id name token accountType } businessAccounts { id name businessId } }",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "4008",
+          "path": ["graphql"],
+          "query": [
+            {
+              "key": "query",
+              "value": "{ tokensAccounts { id name token accountType } businessAccounts { id name businessId } }"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "SuperGetAll",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:4006/graphql?query={ accounts { ... on Account { id } ... on TokensAccount { token  } ... on BusinessAccount { businessId } } }",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "4006",
+          "path": ["graphql"],
+          "query": [
+            {
+              "key": "query",
+              "value": "{ accounts { ... on Account { id } ... on TokensAccount { token  } ... on BusinessAccount { businessId } } }"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
