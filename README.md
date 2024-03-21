@@ -1,12 +1,14 @@
 # Accounts GraphQL
 
-A demo for GraphQL, focusing on federation.
+A demo for GraphQL with [Apollo](https://www.apollographql.com/docs/), focusing on federation.
 
 We have 4 sub-graphs here:
-- Common: Common fields for accounts.
-- Business: Business account implementation.
-- Tokens: Tokens account implementation.
-- Main: Graph for dealing with generic queries.
+- [Common](/graphs/accounts/common): Common fields for accounts.
+- [Business](/graphs/accounts/business): Business account implementation.
+- [Tokens](/graphs/accounts/tokens): Tokens account implementation.
+- [Main](/graphs/accounts/main): Graph for dealing with generic queries.
+
+And then we have a super graph for routing the sub-graph [here](./graphs/super).
 
 ## GraphQL Basics
 
